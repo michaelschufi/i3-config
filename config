@@ -92,15 +92,23 @@ bindsym $mod+a focus parent
 
 # Name the workspaces
 set $tag1 "1: www"
-set $tag2 "2: editor"
+set $tag2 "2: www2"
 set $tag3 "3: tools"
-set $tag4 "4: rdp"
+set $tag4 "4"
 set $tag5 "5"
 set $tag6 "6"
-set $tag7 "7"
-set $tag8 "8"
-set $tag9 "9: teamviewer"
-set $tag10 "10"
+set $tag7 "7: editor"
+set $tag8 "8: terminal"
+set $tag9 "9: teamspeak"
+set $tag10 "10: game"
+
+# assign monitors to workspaces
+workspace $tag1 output DFP1
+workspace $tag2 output DFP1
+workspace $tag3 output DFP1
+workspace $tag7 output DFP2
+workspace $tag8 output DFP2
+workspace $tag9 output DFP2
 
 # switch to workspace
 bindsym $mod+1 workspace $tag1
@@ -114,6 +122,17 @@ bindsym $mod+8 workspace $tag8
 bindsym $mod+9 workspace $tag9
 bindsym $mod+0 workspace $tag10
 
+bindsym $mod+KP_1 workspace $tag1
+bindsym $mod+KP_2 workspace $tag2
+bindsym $mod+KP_3 workspace $tag3
+bindsym $mod+KP_4 workspace $tag4
+bindsym $mod+KP_5 workspace $tag5
+bindsym $mod+KP_6 workspace $tag6
+bindsym $mod+KP_7 workspace $tag7
+bindsym $mod+KP_8 workspace $tag8
+bindsym $mod+KP_9 workspace $tag9
+bindsym $mod+KP_0 workspace $tag10
+
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $tag1
 bindsym $mod+Shift+2 move container to workspace $tag2
@@ -125,6 +144,17 @@ bindsym $mod+Shift+7 move container to workspace $tag7
 bindsym $mod+Shift+8 move container to workspace $tag8
 bindsym $mod+Shift+9 move container to workspace $tag9
 bindsym $mod+Shift+0 move container to workspace $tag10
+
+bindsym $mod+Shift+KP_1 move container to workspace $tag1
+bindsym $mod+Shift+KP_2 move container to workspace $tag2
+bindsym $mod+Shift+KP_3 move container to workspace $tag3
+bindsym $mod+Shift+KP_4 move container to workspace $tag4
+bindsym $mod+Shift+KP_5 move container to workspace $tag5
+bindsym $mod+Shift+KP_6 move container to workspace $tag6
+bindsym $mod+Shift+KP_7 move container to workspace $tag7
+bindsym $mod+Shift+KP_8 move container to workspace $tag8
+bindsym $mod+Shift+KP_9 move container to workspace $tag9
+bindsym $mod+Shift+KP_0 move container to workspace $tag10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -174,8 +204,8 @@ bar {
 	    inactive_workspace #333333 #222222 #888888
 	    urgent_workspace   #aa0000 #990000 #ffffff
         }
-        # comment "mode hide" on remote Session (eg. TeamViewer)
-	mode hide
+        # comment "mode hide" during rdp session (eg. TeamViewer)
+	#mode hide
 	hidden_state hide
 	modifier Mod4
 
@@ -198,8 +228,8 @@ exec --no-startup-id syndaemon -d -i 0.5 -t -K
 exec --no-startup-id exec sh ~/.i3/monitors.sh
 # on specific workspace...
 exec --no-startup-id i3-msg 'workspace $tag1; exec firefox' 
-exec --no-startup-id i3-msg 'workspace $tag2; exec subl' 
-exec --no-startup-id i3-msg 'workspace $tag3; exec i3-sensible-terminal' 
+exec --no-startup-id i3-msg 'workspace $tag7; exec subl' 
+exec --no-startup-id i3-msg 'workspace $tag8; exec i3-sensible-terminal' 
 
 # Set Resolution
 #exec --no-startup-id xrandr --output eDP1 --mode 1920x1080
@@ -215,17 +245,17 @@ bindsym Control+mod4+2 exec sh ~/.i3/extScreen.sh
 
 
 # Pulse Audio controls
-#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5% #increase sound volume
-#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5% #decrease sound volume
-#bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 1 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 1 -5% #decrease sound volume
+bindsym XF86AudioMute exec pactl set-sink-mute 1 toggle # mute sound
 
 # Sreen brightness controls
 #bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
 #bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
 
 # Media player controls
-#bindsym XF86AudioPlay exec playerctl play
-#bindsym XF86AudioPause exec playerctl pause
-#bindsym XF86AudioNext exec playerctl next
-#bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
